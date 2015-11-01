@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="tableApp">
+	<head>
+		<title>table</title>
+		<link href="bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" rel="stylesheet" media="all" />
+	</head>
+
+	<body ng-clock>
+		<div class="container" ng-controller="tableCtrl as ctrl">
+			<div class="row">
+				<div class="col-sm-12">
+					<h1>Table App<small>(Table operations)</small></h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<button class="btn btn-primary" data-ng-click="ctrl.addRow(2)">
+						Add
+					</button>
+					<button class="btn btn-primary" data-ng-click="ctrl.removeRow(2)">
+						Remove
+					</button>
+				</div>
+			</div>
+			<hr/>
+			<div class="row">
+				<div class="col-sm-12">
+					<table class="table table-bordered">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Name</th>
+								<th>Age</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr data-ng-repeat="person in ctrl.persons">
+								<td colspan="3" ng-if="person.flag"><details-table details="person.details"></details-table></td>
+
+								<td ng-if="!person.flag">{{person.id}}</td>
+								<td ng-if="!person.flag">{{person.name}}</td>
+								<td ng-if="!person.flag">{{person.age}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+		</div>
+
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+
+		<script src="app/tableApp.js"></script>
+		<script src="app/tableApp.controllers/tableController.js"></script>
+		<script src="app/tableApp.directives/detailsTable.dir.js"></script>
+	</body>
+
+</html>
