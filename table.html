@@ -12,34 +12,35 @@
 					<h1>Table App<small>(Table operations)</small></h1>
 				</div>
 			</div>
-			<div class="row">
-				<div class="col-sm-12">
-					<button class="btn btn-primary" data-ng-click="ctrl.addRow(2)">
-						Add
-					</button>
-					<button class="btn btn-primary" data-ng-click="ctrl.removeRow(2)">
-						Remove
-					</button>
-				</div>
-			</div>
 			<hr/>
 			<div class="row">
 				<div class="col-sm-12">
+					<button class="btn btn-primary" data-ng-click="ctrl.calculate()">
+						Calculate
+					</button>
+					<button class="btn btn-primary" data-ng-click="ctrl.resetView()">
+						Reset
+					</button>
 					<table class="table table-bordered">
 						<thead>
 							<tr>
+								<th>Select</th>
 								<th>ID</th>
 								<th>Name</th>
 								<th>Age</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr data-ng-repeat="person in ctrl.persons">
-								<td colspan="3" ng-if="person.flag"><details-table details="person.details"></details-table></td>
+							<tr data-ng-repeat="person in ctrl.persons track by person.id">
 
-								<td ng-if="!person.flag">{{person.id}}</td>
-								<td ng-if="!person.flag">{{person.name}}</td>
-								<td ng-if="!person.flag">{{person.age}}</td>
+								<td colspan="4" ng-if="person.showFlag" ng-show="person.toggleFlag"><details-table details="person.details"></details-table></td>
+
+								<td ng-if="!person.showFlag">
+								<input type="checkbox" ng-model="person.selected" />
+								</td>
+								<td ng-if="!person.showFlag">{{person.id}} <a ng-show="person.showDropIcon" ng-click="ctrl.toggleDetailsView($index)"> <i class="glyphicon glyphicon-plus"></i> </a></td>
+								<td ng-if="!person.showFlag">{{person.name}}</td>
+								<td ng-if="!person.showFlag">{{person.age}}</td>
 							</tr>
 						</tbody>
 					</table>
